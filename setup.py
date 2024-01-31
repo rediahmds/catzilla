@@ -1,15 +1,15 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
-    name='catzilla',
+    name='catzilla-cli',
     version='0.0.1',
-    py_modules=['catzilla'],
+    packages=find_packages(include=['catzilla_cli']),
     install_requires=[
         'Click',
     ],
     entry_points={
         'console_scripts': [
-            'catzilla = catzilla:cli',
+            'catzilla = catzilla_cli.main:cli',
         ],
     },
 )
