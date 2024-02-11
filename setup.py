@@ -9,7 +9,7 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "catzilla = cli.main:main",
+            "catzilla = cli.main:cli",
         ],
     },
 )
