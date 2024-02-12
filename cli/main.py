@@ -1,15 +1,15 @@
 import click
 
 
+@click.group()
+def cli():
+    pass
+
+
 @click.command(help="Print simple hello.")
 @click.argument("name", default="world")
 def greet(name):
     click.echo(f"Hello, {name}!")
-
-
-@click.group()
-def cli():
-    pass
 
 
 cli.add_command(greet)
