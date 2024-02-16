@@ -1,8 +1,11 @@
 import time
 import serial
+from rich.console import Console
+
+console = Console()
 
 
-class Speech(object):
+class Speaker(object):
 
     def __init__(self, com="/dev/ttyUSB0", baudrate=9600, debug=False):
         self.SERIAL_PORT = com
@@ -21,7 +24,9 @@ class Speech(object):
                 if self.serial.is_open
                 else "Speech Serial port failed to open"
             )
-            print(f"{status_message} on {self.SERIAL_PORT}! Baudrate={self.BAUDRATE}")
+            res = f"{status_message} on {self.SERIAL_PORT}! Baudrate={self.BAUDRATE}"
+            console.print("[SUCCESS]", style="green bold", end=" ")
+            console.print(f"{res}", style="bold")
 
     def close_serial(self):
         """
@@ -54,7 +59,7 @@ class Speech(object):
 
 
 if __name__ == "__main__":
-    speak = Speech(com="COM10", baudrate=115200, debug=True)
+    speak = Speaker(com="COM10", baudrate=115200, debug=True)
 
     try:
         while True:
