@@ -41,9 +41,16 @@ class Speech(object):
         """
         message_bytes = message.encode()
         self.serial.write(message_bytes)
+        if self.DEBUG:
+            print(f"Data sent: {message_bytes}")
 
     def read(self):
-        return self.serial.read()
+        wait_count = self.serial.in_waiting
+        if wait_count:
+            data = self.serial.read()
+            if self.DEBUG:
+                print(f"Data read: {data}")
+                return data
 
 
 if __name__ == "__main__":
@@ -53,5 +60,6 @@ if __name__ == "__main__":
         while True:
             speak.write("$A092#")
             time.sleep(5)
-    except KeyboardInterrupt:
+    except Exception as err:
         speak.close_serial()
+        print(err)
