@@ -7,8 +7,8 @@ console = Console()
 
 class Speaker(object):
 
-    def __init__(self, com="/dev/ttyUSB0", baudrate=9600, debug=False):
-        self.SERIAL_PORT = com
+    def __init__(self, port="/dev/ttyUSB0", baudrate=9600, debug=False):
+        self.SERIAL_PORT = port
         self.DEBUG = debug
         self.BAUDRATE = baudrate
         self.open_serial()
@@ -35,7 +35,8 @@ class Speaker(object):
         if self.serial.is_open:
             self.serial.close()
         if self.DEBUG:
-            print(f"Speech Serial port Closed!")
+            console.print("[SUCCESS]", end=" ", style="green bold")
+            console.print("Serial port is now closed!")
 
     def is_open(self):
         return self.serial.is_open
@@ -59,7 +60,7 @@ class Speaker(object):
 
 
 if __name__ == "__main__":
-    speak = Speaker(com="COM10", baudrate=115200, debug=True)
+    speak = Speaker(port="COM3", baudrate=115200, debug=True)
 
     try:
         while True:
