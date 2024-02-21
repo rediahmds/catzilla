@@ -49,7 +49,7 @@ class Speaker:
 
   def close_serial(self):
     """
-    Close the serial interface!
+    Close the serial interface.
     """
     if self.serial.is_open:
       self.serial.close()
@@ -85,15 +85,26 @@ class Speaker:
         print(f"Data read: {data}")
         return data
 
+  def send_command_test(self, command="$A087#"):
+    """
+    Test to send command
+
+    Args:
+        `command` (`str`, optional): _description_. Defaults to "$A087#".
+    """
+    try:
+      if not self.is_open:
+        self.open_serial()
+
+      while True:
+        self.write(command)
+        time.sleep(3)
+
+    except Exception as error:
+      self.close_serial()
+      console.print(error, style="red")
+
 
 if __name__ == "__main__":
-  speak = Speaker(port="/dev/ttyUSB0", baudrate=115200, debug=True)
-
-  try:
-    while True:
-      speak.write("$A092#")
-      time.sleep(5)
-  except KeyboardInterrupt as err:
-    speak.close_serial()
-  except Exception as err:
-    console.print(err, style="red")
+  speaker = Speaker(baudrate=115200, debug=True)
+  speaker.send_command_test()
