@@ -60,12 +60,12 @@ class Speaker(object):
 
 
 if __name__ == "__main__":
-    speak = Speaker(port="COM3", baudrate=115200, debug=True)
+    speak = Speaker(port="/dev/ttyUSB0", baudrate=115200, debug=True)
 
     try:
         while True:
             speak.write("$A092#")
             time.sleep(5)
-    except Exception as err:
+    except KeyboardInterrupt as err:
         speak.close_serial()
         print(err)
