@@ -3,6 +3,7 @@
         "ms-python.python",
         "vscode-icons-team.vscode-icons",
         "yzhang.markdown-all-in-one",
-        "DavidAnson.vscode-markdownlint"
+        "DavidAnson.vscode-markdownlint",
+        "ms-python.black-formatter"
     ]
 }
