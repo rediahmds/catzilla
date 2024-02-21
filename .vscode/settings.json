@@ -1,4 +1,13 @@
 {
   "editor.tabSize": 4,
-  "editor.insertSpaces": true
+  "editor.insertSpaces": true,
+  "python.analysis.autoImportCompletions": true,
+  "python.analysis.typeCheckingMode": "basic",
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnSave": true,
+    
+  },
+  "black-formatter.args": ["--config", "pyink.toml"],
+  "black-formatter.path": ["~/.local/share/virtualenvs/catzilla-UJjAhDkb/lib/python3.8/site-packages/pyink"]
 }
