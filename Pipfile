@@ -10,6 +10,7 @@ rich = "*"
 
 [dev-packages]
 pylint = "*"
+black = "*"
 
 [requires]
 python_version = "3.8.10"
