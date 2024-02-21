@@ -1,3 +1,7 @@
+"""
+Module to interact with Speaker-Voice Recognition Module
+"""
+
 import time
 import serial
 from rich.console import Console
@@ -5,15 +9,30 @@ from rich.console import Console
 console = Console()
 
 
-class Speaker(object):
+class Speaker:
+  """
+  Provides API to Speaker-Voice Recognition module.
+  """
 
   def __init__(self, port="/dev/ttyUSB0", baudrate=9600, debug=False):
+    """
+    Instantiate and open serial connection with
+    the Speaker-Voice Recognition module.
+
+    Args:
+        `port` (`str`, optional): port name connected to the module. Defaults to "/dev/ttyUSB0".
+        `baudrate` (`int`, optional): baudrate value. Defaults to 9600.
+        `debug` (`bool`, optional): set debug mode on/off. `True` means that debug mode is on. Defaults to False.
+    """
     self.SERIAL_PORT = port
     self.DEBUG = debug
     self.BAUDRATE = baudrate
     self.open_serial()
 
   def open_serial(self):
+    """
+    Open serial connection in specified constructor argument.
+    """
     # initializes serial interface on specific port and baudrate
     self.serial = serial.Serial(port=self.SERIAL_PORT, baudrate=self.BAUDRATE)
 
@@ -39,6 +58,11 @@ class Speaker(object):
       console.print("Serial port is now closed!")
 
   def is_open(self):
+    """
+    Check if serial port is open
+    Returns:
+        `bool`: `True` means the port is opened.
+    """
     return self.serial.is_open
 
   def write(self, message: str):
@@ -51,6 +75,9 @@ class Speaker(object):
       print(f"Data sent: {message_bytes}")
 
   def read(self):
+    """
+    Read data sent by Speaker-Voice Recognition module.
+    """
     wait_count = self.serial.in_waiting
     if wait_count:
       data = self.serial.read()
@@ -68,4 +95,5 @@ if __name__ == "__main__":
       time.sleep(5)
   except KeyboardInterrupt as err:
     speak.close_serial()
-    print(err)
+  except Exception as err:
+    console.print(err, style="red")
