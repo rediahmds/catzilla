@@ -20,9 +20,11 @@ class Speaker:
     the Speaker-Voice Recognition module.
 
     Args:
-        `port` (`str`, optional): port name connected to the module. Defaults to "/dev/ttyUSB0".
+        `port` (`str`, optional): port name connected to the module. 
+         Defaults to "/dev/ttyUSB0".
         `baudrate` (`int`, optional): baudrate value. Defaults to 9600.
-        `debug` (`bool`, optional): set debug mode on/off. `True` means that debug mode is on. Defaults to False.
+        `debug` (`bool`, optional): set debug mode on/off. 
+        `True` means that debug mode is on. Defaults to False.
     """
     self.SERIAL_PORT = port
     self.DEBUG = debug
@@ -43,9 +45,11 @@ class Speaker:
           if self.serial.is_open
           else "Speech Serial port failed to open"
       )
-      res = f"{status_message} on {self.SERIAL_PORT}! Baudrate={self.BAUDRATE}"
+      status = (
+        f"{status_message} on {self.SERIAL_PORT}! Baudrate={self.BAUDRATE}"
+      )
       console.print("[SUCCESS]", style="green bold", end=" ")
-      console.print(f"{res}", style="bold")
+      console.print(f"{status}", style="bold")
 
   def close_serial(self):
     """
@@ -100,9 +104,9 @@ class Speaker:
         self.write(command)
         time.sleep(3)
 
-    except Exception as error:
+    except KeyboardInterrupt as keyboard_interrupt_err:
       self.close_serial()
-      console.print(error, style="red")
+      console.print(keyboard_interrupt_err, style="red")
 
 
 if __name__ == "__main__":
