@@ -17,12 +17,13 @@ class Speaker:
   def __init__(self, port="/dev/ttyUSB0", baudrate=9600, debug=False):
     """
     Instantiate and open serial connection with
-    the Speaker-Voice Recognition module.
+    the Speaker-Voice Recognition module immediately.
 
     Args:
         `port` (`str`, optional): port name connected to the module. 
-         Defaults to "/dev/ttyUSB0".
-        `baudrate` (`int`, optional): baudrate value. Defaults to 9600.
+         Defaults to "/dev/ttyUSB0" in Ubuntu.
+        `baudrate` (`int`, optional): baudrate value. It represents how many
+         bits sent to the module per second. Defaults to 9600.
         `debug` (`bool`, optional): set debug mode on/off. 
         `True` means that debug mode is on. Defaults to False.
     """
